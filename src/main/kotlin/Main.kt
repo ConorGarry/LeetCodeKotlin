@@ -18,7 +18,7 @@ private fun linkedListRecursion() {
         // Iterative item first will result in backwards
         // printList(node.next)
         // println("out: ${node.`val`}")
-        //or
+        // or
         // Iterative after print will result in order.
         println("out: ${node.`val`}")
         printListInPlace(node.next)
@@ -33,7 +33,6 @@ private fun linkedListRecursion() {
     printListInPlace(list)
     printReturnList(list)
 
-
     /**
      * Recursive contains check.
      *
@@ -41,9 +40,9 @@ private fun linkedListRecursion() {
      * Recursive: O(n) time, O(n) space.
      */
     fun contains(node: ListNode?, target: Int): Boolean {
-        if (node == null) return false          // Item not in List.
-        if (node.`val` == target) return true   // Found item.
-        return contains(node.next ,target)      // Recursive call.
+        if (node == null) return false // Item not in List.
+        if (node.`val` == target) return true // Found item.
+        return contains(node.next, target) // Recursive call.
     }
 
     println("contains 10: ${contains(list, 10)}")
@@ -53,7 +52,7 @@ private fun linkedListRecursion() {
      * Sum up list.
      */
     fun sumList(node: ListNode?): Int {
-        if (node == null) return 0  // Return is initial sum.
+        if (node == null) return 0 // Return is initial sum.
         return node.`val` + sumList(node.next)
     }
     println("sumUpList (should be 28): ${sumList(list)}")
