@@ -10,21 +10,23 @@
  */
 fun main() {
     // Iterative. Even size.
-    println("Swap Nodes: 1, 2, 3, 4:\n${
+    println(
+        "Swap Nodes: 1, 2, 3, 4:\n${
         swapPairs(
             buildLinkedList(1, 2, 3, 4)
-        )
-    }\n")
+        )}\n"
+    )
 
     // Recursive. Odd size.
-    println("Swap Nodes: 1, 2, 3, 4, 5:\n${
+    println(
+        "Swap Nodes: 1, 2, 3, 4, 5:\n${
         swapPairsRec(
             buildLinkedList(1, 2, 3, 4, 5)
-        )
-    }")
+        )}"
+    )
 }
 
-// {-1}  [1] -> [2] -> [3] -> [4]
+// [-1]  [1] -> [2] -> [3] -> [4]
 //  t     c             n
 fun swapPairs(head: ListNode?): ListNode? {
     var current: ListNode? = head ?: return head
@@ -35,11 +37,11 @@ fun swapPairs(head: ListNode?): ListNode? {
     while (current?.next != null) {
         val next = current.next!!.next // [3]
 
-        temp.next = current.next    // points at [2]
-        temp.next?.next = current   // [2] points at [1]
+        temp.next = current.next // points at [2]
+        temp.next?.next = current // [2] points at [1]
 
-        temp = temp.next?.next!!    // Move forward two steps [2] to [4]
-        current = next              // Points at [3]
+        temp = temp.next?.next!! // Move forward two steps [2] to [4]
+        current = next // Points at [3]
     }
 
     // Happens if List size is odd.
@@ -56,9 +58,7 @@ fun swapPairsRec(head: ListNode?): ListNode? {
     if (head?.next == null) return head
 
     val current = head.next
-    val next = current!!.next
-
+    head.next = swapPairsRec(current!!.next)
     current.next = head
-    head.next = swapPairs(next)
     return current
 }
