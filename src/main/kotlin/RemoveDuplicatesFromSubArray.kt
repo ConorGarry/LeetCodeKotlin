@@ -12,7 +12,8 @@ fun main() {
 }
 
 fun removeDuplicates(nums: IntArray): Int {
-    var l = 1 // Unique index pointer.
+    // Unique index pointer. We know that 0 will be sorted so start from 1.
+    var l = 1
     for (i in 1 until nums.size) {
         if (nums[i] != nums[i - 1]) {
             nums[l] = nums[i]
