@@ -13,6 +13,18 @@ fun buildLinkedList(vararg nums: Int): ListNode {
 }
 
 /**
+ * Print 2D array to console.
+ */
+fun print2dArray(arr: Array<IntArray>) {
+    for (i in arr.indices) {
+        for (j in 0 until arr[0].size) {
+            print(arr[i][j])
+        }
+        println()
+    }
+}
+
+/**
  * Reverse an Integer's digits without requiring Char/String conversion.
  * e.g. 12345 becomes 54321.
  */
