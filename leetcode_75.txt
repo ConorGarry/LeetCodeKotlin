@@ -1,0 +1,446 @@
+--------
+Arrays
+--------
+* 2Sum
+    - Create count map of char to index, iterate and check if target diff in char map.
+    - (If we can sort) 2 pointers, converge from l and r, adjusting as needed.
+* Duplicates
+    - Iterate and keep a set of visited members.
+    - (If we can sort) iterate from 1, check if previous char is duplicate.
+* Stock prices
+    - Sliding window, expand r while prices increase, keep rolling max sum. Re-open window when price drops.
+* Maximum sub-array
+    - Iterate with rolling sum and max, if sum ever drops < 0, change it to 0 (this negates negatives).
+* Max product sub-array
+    - Keep res (default to max of array), rolling curMax, curMin, (set at 1) get max/min of curMax, curMin, n for
+        each loop, update max to res where applicable.
+        DP where we keep eventualities for both positive and negative product results.
+* 2Sum II
+    - sorted version of 2Sum
+        2 pointers, l, r, Iterate nums with for loop. when branch check if nums[l] + nums[r] = target.
+        adjust l/r as required
+    - NOTE this is 1 indexed instead of usual 0 index.
+* 3Sum
+    - similar to prev 2Sums where target is 0 instead of passed in value.
+    loop with i (acts as stationary left), then while l < r.
+    Start with a sort!
+    Nuanced difference, once we get a match, only l needs to be incremented in a while loop.
+    Ensure it's not a duplicate, i and l require checks:
+        i: i > 0 && nums[i -1] == nums[i]. start of loop.
+        l: if (nums[l] == nums[l-1]). when incrementing l.
+* Rotate Array
+    - Two ways, both pretty cheap.
+    - temp array, copy in using an offset where nums size is exceeded (i + k) % length.
+    - Or in place'
+        Modulo the K.
+        Create swap functkon.
+        do 3 swaps.
+* Binary Search
+    - Get start and end pointers.
+    - while (l < r) divide (l + r) / 2 (remember no floor/ceil in BS).
+    - if target < m, r = m - 1 (search first half), if > m l = m + 1 (top half)
+* Find in rotated Array
+    - Same as BS with couple of important changes.
+    - !! (l <= r) instead of usual just < when iterating two pointers.
+    - if nums[l] < nums[m], perform extra check to see if targer is in that region.
+        if (target > nums[m] or  target < nums[l]) - then it's in top half.
+      and vice versa.
+* Min of Rotated Array
+    - Rolling res, def to first element.
+    - 2 pointer while (with =). If already in sorted array (nums[l] < nums[r>), try res, break.
+    - Get m, decide on upper/lower half for next iteration. Upper if nums[m] >= nums[l].
+
+* Product of array except self
+    - Create IntArray of 1s, same size as input.
+        prefix = 1, interate 0 to end, prefix *= num at i.
+        postfix = 1, interate end to 0, postfix *= num at i.
+        return res
+
+* Container w/ most water
+    - Two pointers at edges, converge w/ (l < r).
+        Calculate area at each step: (r - l) * Math.min(height[l], height[r]).
+            (min because we're holding water!).
+            If (height[l] < height[r]) l++ else r-- (if equal, either can be moved).
+        return res
+
+* Add numbers / add one (Array from to nums + vice verse).
+    - Create list to store result, create a var for the k (as it's passed in as val).
+    iterage nums.size i to 0.
+    while (--i >= 0 || cur > 0)
+        if (i >= 0) we're still adding
+            cur == nums[i]
+         push cur % 10 to 0 of list (should we use LinkedList/ Stack instead?).
+         decrement divide cur /= 10
+    Side note: to convert list into number (sum), iterate i:
+        sum = sum * 10 + num[i]
+
+
+--------
+Strings
+--------
+* Valid palindrome
+    - Two pointers, converging from edges. Moving uniformly where possible.
+    If one encounters nonAlpha char, use while loop to progress until it reaches a valid char.
+* Valid anagram
+    - Use a counted map for each String, iterate keySet checking adjacent maps.
+    - Or sort both, iterate and fail early if no mathc.
+* Longest Palindromic substring
+    - Iterate with a middle-out algorithm.
+    - Account for both even and odd palindromes (make a function).
+    - Rolling res/count of longest.
+* Palindromic substrings
+    - Similar to longest, only keep a rolling count.
+    Shared funciton is a bit cleaner, just returns Int.
+    - Two letters together count as a palindrome so there are likely to be a good few.
+* Group Anagrams
+    - Interesting solution by making a map with a list of Int 26 long as a key. (num of instances of a char)
+    Iterate Strings, create an IntArray called 'count' for each.
+        iterate char of each String, increment count with c.toChar() - 'a'.
+         Append or update (getOrPut) map with MutableList and add String.
+    return map.values.toList().
+
+* Valid parenthesis
+    Create a Stack to hold parenthesis and facilitate backtrack.
+    Create a map of open to closed parenthesis.
+    for each s in word
+        if in map, add map value for key to stack.
+        else
+            if stack empty or removeLast from stack not 2, return false
+     return stack.isEmpty()
+
+* Longest repeat char replacement
+    PAY ATTENTION: limited to chars A-Z;
+    for each capital char, check if it could create the longest repeating substr, use sliding window to optimize;
+    check if windowlen=1 works,
+        if yes, increment len,
+        if not, shift window right;
+
++ Longest unique substring
++ Min window substring
++ Encode / decode string.
+
++ Reverse vowels
++ Longest common prefix
+
+------------
+LinkedLists
+------------
+* Reverse
+    Iterative: 3 pointer, current.next while loop.
+    Recursive: base case if head?.next null.
+    recursively return returnedNode, eaches 2nd last, perform switch as tasks decrement.
+
+* Detect cycle
+    - Use a set to keep track, iterate, add or return as case may ne.
+    - Floyd's fast/slow pointer, if they meet, there's a loop.
+* Merge 2 sorted
+    Well practiced.
+    Base case, check if either is null, return other.
+    Create val result Node -1 and a temp to iterate.
+    Create var pointers, iterate while both not null.
+
+*  Merge K sorted
+    Two methods:
+        1. Add to an ArrayList,
+            Outer while loop, iterate in paired intervals,
+            eventually merge all to first list, return that.
+
+        2. Heap sort: Create a PriorityQueue with min sort.
+            Add all Lists with a forEach.
+            Create dummy ListNode.
+            poll from queue and add to result List.
+                if polled has a next, add it to the queue.
+
+* Remove Nth from end
+    Two pointer, fast iterates to n before they can bother iterate together.
+    slow.next = slow.next.next to remove nth from end Node.
+    return head
+
+* Detect middle / split
+    Floyd's fast/slow pointer.
++ Find/remove nth in List.
++ Remove duplicate
++ Remove all from list
++ Reorder list
++ Rotate LinkedList
++ Intersection of 2 lists
++ Sort (merge sort) and iterative.
+
++ Rotate
++ Add numbers
++ Detect palindrome
+
+---------
+Intervals
+---------
++ Detect overlap
++ Count overlaps
++ Min amount to remove to fix overlap
++ Merge intervals
++ Insert interval
++ Get most compatible (University fair / table? booking).
+
+Dynamic Programming
++ Coin Change
++ Number of steps
++ Longest increasing sub-sequence https://www.youtube.com/watch?v=cjWnW0hdF1Y
++ Longest common sub-sequence
++ Word break problem
++ House robber I / II
++ Decode Ways
++ Unique paths
++ Combination sum
+
+-------
+Matrix
+-------
++ Rotate image
++ Spiral traversal
++ Detect box of 1's / 0's
++ Word search
++ Set zero's
+
+-----
+Trees
+-----
+* Max depth
+    recursive:  1 + Math.max(maxDepth left and right), base case if null, 0.
+    Iterative: Level order traverse, increment count for each layer.
+
+* Same tree
+    Recurse l and r.
+        Base cases: Both null: ret ture, only one null: ret false.
+        Recursive check l.val == r.val, isSame(l.left, r.left) && isSame(l.right, r.right).
+
+* Invert / flip binary tree
+    recursion:
+        Base case if null return null.
+        Invert left recursively: invertTree(root.left)
+        Invert right recursivley: invertTree(root.right)
+        switcheroo: val temp = root.left -> root.right
+        return root
+
+* Subtree of other
+    Base cases: is root null, is subRoot null.
+    Check isSameTree(root, subRoot)
+    recursive check: isSubSTree(root.left, subRoot) || isSubTree(root.right, subRoot).
+        || because it might be in either side.
+
+* BFS / level order
+    - Create queue (but fail early if root is null).
+        Create List<List> to hold results. Add first item.
+        while queue is not null,
+         Create List for level
+         for i in queue
+             pop from start (Queue!)
+             if left not null, add to queue, add value to level list
+             if right not null, add to queue, add valid to level list.
+         If levelList is not empty (it might have been populated with leaf ndoes), add to list.
+        return list.
+
+* Validate BST
+    - Recurse, inner function, isValid(node: Node?, min Int? = null, max: Int? = null): Boolean
+        Base case, if null return TRUE
+        if (min not null and min >= node.val) return false
+        else if (max not null and max < node.val) return false
+        return isValid(node.left, min, node.val) && isValid(node.right, node.val, max)
+
+* Kth smallest element in BST
+    - In order traversal, create a list then return index k-1.
+    - Recursion is simple, InOrder BST traversal iteratively is the involved one.
+
+* Lowest Common Ancestor
+    - Iterative: set node to root.
+        While node != null
+            if p and q not null and less than node.val, LCA lies to the left. node = node.left.
+            if p and q not null and greater node.va, LCE list to the right, so node = node.right.
+            else return node, we have found LCA.
+    - Recursive: exact same process, if root == null return,
+        for checks: lowestCommonAncestor(node.left, p, q), or (node.right, p, q), else return node.
+
+* Serialise / DeSerialise Binary Tree
+    inOrder dfs, using an inner dfs() in each function of the codec.
+    Add nodes to a list<String>, use "n" to represent null.
+    for deserialise, similar revers process, use incremnter i.
+    return dfs()
+
+* Construct Binary tree from pre-order and in-order.
+    - Can use inorder to get root nodes. Get their index in pre-order,
+        known as 'mid', then we know what's left and right.
+
++ N-ary Level Order w/ recursion (though likely not required).
+// Trie
+* Implement Trie
+    - Use simplified way, book had a lot of extras.
+    - TrieNode is the important pater, anything can be a "Trie", e.g. WordDictionary
+        in word search problem. Just make sure to give it a root TrieNode.
+* Add and Search word (trie?)
+    Tricky one if dot searching is required.
+    Iterate recursively omitting the first char each time (as long as true is returned).
++ Word search II (Omitting for now (patreon interview))
+
+// BST specifics
+* Insert
+    Assign nodeVal but also check for base case,
+        if node is null, we found insertion point. Return new TreeNdoe of val.
+    if inserVal < nodeVal, insertion goes in left subtree.
+        root.left = insertIntoBST(roo.left.val), else it goes into right subtree.
+    return root.
+
+Search Iterative and Recursive
+    1. Start by setting current to the root node.
+    2. While current is not null, check the current node’s value.
+    3. If the value is equal to what you’re trying to find, return true.
+    4. Otherwise, decide whether you’re going to check the left or right child.
+    This implementation of contains is an O(log n) operation in a balanced binary search tree.
+
+* Traversals: InOrder, PreOrder, PostOrder.
+    Added
+
+* IsSymmetric
+    Base case check root is null, ret true
+    Create inner recursive funciton isMirror.
+    Check both null (ret true)
+    Check both not null and equal values and recursive calls opposite patterns. (mirrored).
+
+* Delete Node (recursive min function).
+    Involved when statement from book.
+    If a node has 2 children, we must take smallest from right subtree and swap.
+    then delete swapped node from right subtree.
+
+* Min Depth
+    Slightly more involved than max depth, requires 4 branch when statement.
+    left and right null, ret 1
+    left null ret 1 + minDepth(right)
+    right null ret 1 + minDepth(left
+    else Math.min(minDepth(left), minDepth(right))
+
+// Recursives.
++ Path with Given Sum
++ Tree Sum
++ has path sum
++ Exists in Tree
++ Binary Tree Max Sum Path (Hard. Omitting for now).
+
+-----
+Algos
+-----
+* Binary Search ArrayList (it / rec)
+    Divide in half, search either top or bottom depending on num comparison.
+    It and Rec versions very similar.
+
+* Median of 2 sorted arrays
+    Join the arrays.
+    Sored joined array.
+    Find median, note the extra steps depending on whether or not it's even.
+
+* ArrayForm to Int, vice verse. (Pop Integer digits for example).
+
+------
+Graphs
+------
++ Clone Graph
++ Course Schedule
++ Pacific Atlantic Water Flow
++ Number of Islands
++ Graph Valid Tree
++ Number of Connected Components in and Undirected Graph
++ Longest Consecutive Sequence
++ Alien Dictionary
+
+-----
+Heaps
+-----
+* Sort K LinkedLists (covered in LinkedList section).
+
+Data Structures
+- Queue
+- Stack
+- LRUCache (questions: limitations).
+- Trie
+- HashTable?
+
+Sorting
+- Bubble sort
+- Selection sort
+- Quick sort
+- Merge sort
+- Insertion sort
+- Heap sort
+
+
+Patreon glassdoor
+LRU Cache
+Design cache
+Design twitter, tackle scaling.
+Genrate random passwords with certain character sets.
+Learn data structures and solve some questions based on DS.
+
+Interview
+
+They asked various question about programming, how different programs work. What kind of teams do I like ? What projects have i worked on and so on. What inspires me in life?
+Interview Questions
+
+DIfference between c and python
+
+Interview Questions
+How would you build the feed (view, data, APIs) for a Patreon user?
+Do a mock code review of this code as if you were a colleague of mine.
+Interview Questions
+
+    Just standard "tell me about something you've worked on"
+
+    Interview Questions
+
+
+Generating passwords with the random library
+
+(SRE) Interview Questions
+
+Describe a large-scale system that you've built
+
+Senior Software Engineer, IOS Interview
+
+Anonymous Employee in San Francisco, CA
+Accepted Offer
+Positive Experience
+Average Interview
+Application
+
+I applied online. The process took 6 weeks. I interviewed at Patreon (San Francisco, CA) in Mar 2018
+Interview
+
+I had a phone screen with the recruiter, and then a technical phone interview with the hiring manager.
+I didn't get the information that the phone interview would be technical, so not prepared very well. But fortunately I made it to on-site.
+It took almost a month for them to schedule my on-site. So please be patient.
+On-site was consist of three technical and two behavioral interviews. Technical interviews are architecture, code review and pair programming.
+If you have thought about how we can make the mobile app architecture better a lot, then you would have good advantage. Take a look at the GitHub pull
+request review process if you haven't used it. When you do the pair programming, try to describe your thought process as much as you can while you are thinking.
+there are no brain teaser questions or data-structure/algorithm questions. But you need to know the basic complexity like big O notation.
+The biggest part of the Patreon culture is the empathy for creators I think. If you can show that reflected by your experience, that would help a lot.
+Read about company's mission and think about how that could align with you personal mission.
+
+
+I really really like the interviewers during my interview. They were all very nice, kind and smart.
+I specially enjoyed the lunch time, where I could talk casually with employee even from other teams.
+They were so funny and nice, and that made me relaxed.
+
+§
+
+Patreon's mobile team is still pretty small and there are a lot of technical challenges and room to experiment. The team is really open to it. That's something you can't do at a big company. If that's your thing, you'd love to work here. Like I do now.
+Interview Questions
+How would you architect a simple photo sharing app on iOS?
+
+I describe using all of my knowledge about mobile app architecture. MVC, MVVM, Viper and so on. Tell them what you know even though it's not directly related to the sample app in the question. Also think about how you would design the API model.
+
+
+
+Senior Frondtend
+Interview
+
+1 coffee date, 1 phone screen, 1 onsite
+
+Onsite: 2 soft skills, 1 hands on pair programming exercise, 1 architecture question, 1 whiteboard coding exercise (they no longer do this one), hiring manager check-in, lunch
+Interview Questions
+
+    Given some code, how would I provide feedback for engineers at varying levels of experience.

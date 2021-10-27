@@ -12,6 +12,23 @@ fun buildLinkedList(vararg nums: Int): ListNode {
     return result.next!!
 }
 
+/*fun buildNaryTree(vararg nums: Int?): Node {
+    val result = Node(-1)
+    var current = result
+    for (i in nums) {
+        if (i == null) {
+            continue
+        }
+        current.children.add(Node(i))
+    }
+}*/
+
+fun <T> swap(list: MutableList<T>, x: Int, y: Int) {
+    val tmp = list[x]
+    list[x] = list[y]
+    list[y] = tmp
+}
+
 /**
  * Print 2D array to console.
  */

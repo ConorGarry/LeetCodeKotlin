@@ -42,3 +42,21 @@ fun removeNthFromEndRec(head: ListNode?, n: Int): ListNode? {
     }
     return remove(head, n)
 }
+
+// Neetcode, version, uses dummy Node at start.
+// Clean and fast, with no edgecases!
+fun removeNthFromEndDummy(head: ListNode?, n: Int): ListNode? {
+    // Fastest, no edge case to worry about.
+    val dummy = ListNode(-1, head)
+    var slow: ListNode? = dummy
+    var fast: ListNode? = dummy
+    for (i in 0..n) {
+        fast = fast!!.next
+    }
+    while (fast != null) {
+        slow = slow?.next
+        fast = fast.next
+    }
+    slow?.next = slow?.next?.next
+    return dummy.next
+}
