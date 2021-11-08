@@ -36,10 +36,10 @@ fun main() {
 */
 /**
  * 1. sort in place by starting time.
- * 2. Init output array/list with first element (we will at least hive this).
+ * 2. Init output array/list with first element (we will at least have this).
  * 3. Iterate from 1 (second element).
  * 4. if start less than or equal to end of previous, there is overlap.
- *      Set previous element to mx of lastEnd and current end.
+ *      Set previous end to max of lastEnd and current end.
  * 5. Else just add interval to output result.
  */
 private fun merge(intervals: Array<IntArray>): Array<IntArray> {

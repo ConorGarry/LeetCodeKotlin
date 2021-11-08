@@ -37,8 +37,8 @@ private fun search(nums: IntArray, target: Int): Int {
     //println("${nums.toList()} : $target")
 
     // !! NOTE: this pattern in BS is generally just `<`, but for rotated array we need `<=` !!
-    while (l < r) {
-        val m = l + ((r - l) / 2)
+    while (l <= r) {
+        val m = (l + r) / 2
         when {
             target == nums[m] -> return m
             // Left sorted portion.

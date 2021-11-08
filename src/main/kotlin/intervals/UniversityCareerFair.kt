@@ -7,7 +7,6 @@ import java.util.*
  *
  * Arrange university's career fair, has a list of arrive times and durations, only one stage is available.
  *
- *
  * Reddit description:
  * The question is pretty much given 2 arrays, one for arrival times and one for duration of stay
  * (the indexes match up to each other), how many companies can perform at a career fair.
@@ -47,7 +46,7 @@ fun maxEvents(
     var (ans, end) = 0 to Int.MIN_VALUE
     sorted.forEach { (arr, dur) ->
         // if arrival >= to end, increment ans, update end as the end time for current event.
-        // Otherwise ignore the current event.
+        // Otherwise, ignore the current event.
         if (arr >= end) {
             ans++
             end = arr + dur

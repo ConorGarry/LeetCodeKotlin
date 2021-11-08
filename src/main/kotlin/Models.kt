@@ -48,6 +48,12 @@ class TreeNodes {
                 } ?: "${root}null\n"
             }
         }
+
+        class CharTreeNode(
+            var `val`: Int,
+            var left: TreeNode? = null,
+            var right: TreeNode? = null,
+        )
     }
 }
 

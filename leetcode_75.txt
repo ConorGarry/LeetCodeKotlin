@@ -42,7 +42,7 @@ Arrays
 * Find in rotated Array
     - Same as BS with couple of important changes.
     - !! (l <= r) instead of usual just < when iterating two pointers.
-    - if nums[l] < nums[m], perform extra check to see if targer is in that region.
+    - if nums[l] < nums[m], perform extra check to see if target is in that region.
         if (target > nums[m] or  target < nums[l]) - then it's in top half.
       and vice versa.
 * Min of Rotated Array
@@ -173,9 +173,27 @@ LinkedLists
 ---------
 Intervals
 ---------
-+ Detect overlap
-+ Count overlaps
-+ Min amount to remove to fix overlap
+* Detect overlap (Meeting Rooms)
+    1. Sort by start time
+    2. Iterate from 1, if start of current < end of i - 1, return false.
+    3. Return true.
+
+* Count overlaps (Meeting Rooms II)
+    1. Extract start and end times to separate sorted lists.
+    2. Keep rolling sums: count, res, (s)tart, (e)nd. While s < size.
+    3. If starts[s] < starts[e] inc. count and s, else INCREMENT e, decrement count.
+    4. Check for Max (res, count).
+    5. Return res.
+
+* Non-Overlapping Intervals; Min amount to remove to fix overlap
+    1. Sort (by start).
+    2. Keep rolling res.
+    3. Start with prevEnd (we always keep an end value), iterate (start, end) from 1.
+    4. If start >= prevEnd, no overlap, update prevEnd to current end
+        else inc. res and set prevEnd to min(end, prevEnd).
+        prevEnd will be updated on every iteration, either to a new end, or to the min of (prevEnd, end).
+    O(n logn). Iterate is n, sort is log n.
+
 + Merge intervals
 + Insert interval
 + Get most compatible (University fair / table? booking).

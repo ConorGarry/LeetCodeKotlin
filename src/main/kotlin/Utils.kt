@@ -1,3 +1,5 @@
+import TreeNodes.BinaryTree.TreeNode
+
 /**
  * Build a LinkedList of [ListNode] from 1 or more Integers.
  * @param nums vararg of [Integer]
@@ -12,16 +14,82 @@ fun buildLinkedList(vararg nums: Int): ListNode {
     return result.next!!
 }
 
-/*fun buildNaryTree(vararg nums: Int?): Node {
-    val result = Node(-1)
-    var current = result
-    for (i in nums) {
-        if (i == null) {
-            continue
+fun TreeNode.l(n: Int) {
+    left = TreeNode(n)
+}
+
+fun TreeNode.r(n: Int) {
+    right = TreeNode(n)
+}
+
+fun TreeNode.lr(n: Pair<Int, Int>) {
+    val (l, r) = n
+    left = TreeNode(l)
+    right = TreeNode(r)
+}
+
+data class TreeWrap(
+    var node: TreeNode,
+)
+
+/**
+ * Build a Binary Tree from Array representation.
+ * This can accommodate icomplete binary trees, hence the nullable Int? type.
+ */
+fun buildBinaryTree(nums: Array<Int?>): TreeNode? {
+
+    fun createTree(node: TreeNode?, i: Int, arr: Array<Int?>) {
+        if (node == null) return
+        val iL = 2 * i + 1
+        if (iL < arr.size) {
+            if (arr[iL] != null)
+                node.left = TreeNode(arr[iL]!!)
+            createTree(node.left, iL, arr)
         }
-        current.children.add(Node(i))
+        val iR = 2 * i + 2
+        if (iR < arr.size) {
+            if (arr[iR] != null)
+                node.right = TreeNode(arr[iR]!!)
+            createTree(node.right, iR, arr)
+        }
     }
-}*/
+    if (nums.isEmpty()) return null
+    val head = TreeNode(nums[0]!!)
+    createTree(head, 0, nums)
+    return head
+
+    // Only works for complete.
+    /*fun createTree(arr: Array<Int?>, root: TreeNode?, i: Int): TreeNode? {
+        if (i >= arr.size) return root
+        arr[i]?.run {
+            val head = TreeNode(this)
+            head.left = createTree(arr, head, 2 * i + 1)
+            head.right = createTree(arr, head, 2 * i + 2)
+            return head
+        }
+        return root
+    }
+    return createTree(nums, TreeNode(-1), 0)*/
+}
+
+fun insertLevelOrder(
+    arr: IntArray, root: TreeNode,
+    i: Int,
+): TreeNode {
+    // Base case for recursion
+    var root = root
+    if (i < arr.size) {
+        val temp = TreeNode(arr[i])
+        root = temp
+
+        // insert left child
+        root.left = insertLevelOrder(arr, root.left!!, 2 * i + 1)
+
+        // insert right child
+        root.right = insertLevelOrder(arr, root.right!!, 2 * i + 2)
+    }
+    return root
+}
 
 fun <T> swap(list: MutableList<T>, x: Int, y: Int) {
     val tmp = list[x]
