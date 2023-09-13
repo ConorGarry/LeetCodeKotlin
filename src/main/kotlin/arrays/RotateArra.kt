@@ -22,7 +22,7 @@ fun main() {
         intArrayOf(1, 2, 3, 4, 5, 6, 7) to 3,   // Expected: [5, 6, 7, 1, 2, 3, 4]
         intArrayOf(-1, -100, 3, 99) to 2,       // Expected: [3,99,-1,-100]
     ).forEach { (arr, t) ->
-        //println("rotateArray ${arr.toList()}, by: ${t}: ${rotateArray(arr, 3).toList()}")
+        /*println("rotateArray ${arr.toList()}, by: ${t}: ${rotateArray(arr, 2).toList()}")*/
         println("rotateInPlace ${arr.toList()}, by: ${t}: ${rotateInPlace(arr, t).toList()}")
     }
 }
@@ -32,23 +32,17 @@ fun main() {
  * Space: O(n) (extra array for copying).
  */
 fun rotateArray(nums: IntArray, k: Int): IntArray {
-    //val temp = IntArray(k + 1) { nums[it] }
     val temp = IntArray(nums.size)
     for (i in nums.indices) {
-        val offset =
-            if (i + k < nums.size) i + k
-            else (i + k) % nums.size
+        val offset = (i + k) % nums.size
         temp[offset] = nums[i]
     }
-    for ((i, n) in temp.withIndex()) {
-        nums[i] = n
-    }
-
     return temp
 }
 
 // Time: O(n)
 // Space: O(1)
+// Reverse entire array. Then reverse first k elements. Then reverse last n - k elements.
 fun rotateInPlace(nums: IntArray, k: Int): IntArray {
     val kMod = k % nums.size
 

@@ -34,7 +34,7 @@ data class TreeWrap(
 
 /**
  * Build a Binary Tree from Array representation.
- * This can accommodate icomplete binary trees, hence the nullable Int? type.
+ * This can accommodate incomplete binary trees, hence the nullable Int? type.
  */
 fun buildBinaryTree(nums: Array<Int?>): TreeNode? {
 

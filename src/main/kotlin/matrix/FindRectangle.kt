@@ -1,7 +1,7 @@
 package matrix
 
 /**
- * Not on Leetcode. Asked in Reddit Hackerrank.
+ * Not on LeetCode. Asked in Reddit Hackerrank.
  *
  * Given a rectangle represented by a 0-1 2-d array and assume it contains
  * one rectangle of all 0, return the upper left corner and lower right corner.
@@ -66,14 +66,14 @@ fun findSquare(m: Array<IntArray>, left: Int, top: Int): List<IntArray> {
     while (l < m[0].size) {
         if (m[top][l] != 0) {
             res += intArrayOf(top, l - 1)
-            break;
+            break
         }
         l++
     }
     while (t < m.size) {
         if (m[t][left] != 0) {
             res += intArrayOf(t - 1, l - 1)
-            break;
+            break
         }
         t++
     }

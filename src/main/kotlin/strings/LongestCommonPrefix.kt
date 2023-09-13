@@ -14,15 +14,26 @@ fun main() {
     }
 }
 
+/**
+ * Start by assuming that the first string in the array is the common prefix.
+ *
+ * This algorithm works by iteratively comparing the prefix with each string in the array,
+ * progressively reducing the prefix until it no longer matches the beginning of a string or
+ * becomes empty. This ensures that you find the longest common prefix among all the strings.
+ *
+ * It does this by using a while loop to compare prefix with current str character by character
+ * While prefix does not match the beginning of str, keep removing the last character from prefix.
+ * If at any point prefix becomes empty (meaning there's no common prefix), immediately return an empty string.
+ */
 fun longestCommonPrefix(strs: Array<String>): String {
     var prefix = strs.first()
     for (i in 1 until strs.size) {
         while (!strs[i].startsWith(prefix)) {
             prefix = prefix.substring(0, prefix.length - 1)
-            if (prefix.isEmpty()) break
+            if (prefix.isEmpty()) return prefix
         }
     }
-    return prefix.ifEmpty { "" }
+    return prefix
 }
 
 /*

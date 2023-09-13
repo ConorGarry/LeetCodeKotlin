@@ -33,7 +33,7 @@ Arrays
     - temp array, copy in using an offset where nums size is exceeded (i + k) % length.
     - Or in place'
         Modulo the K.
-        Create swap functkon.
+        Create swap function.
         do 3 swaps.
 * Binary Search
     - Get start and end pointers.
@@ -83,14 +83,14 @@ Strings
     If one encounters nonAlpha char, use while loop to progress until it reaches a valid char.
 * Valid anagram
     - Use a counted map for each String, iterate keySet checking adjacent maps.
-    - Or sort both, iterate and fail early if no mathc.
+    - Or sort both, iterate and fail early if no match.
 * Longest Palindromic substring
     - Iterate with a middle-out algorithm.
     - Account for both even and odd palindromes (make a function).
     - Rolling res/count of longest.
 * Palindromic substrings
     - Similar to longest, only keep a rolling count.
-    Shared funciton is a bit cleaner, just returns Int.
+    Shared function is a bit cleaner, just returns Int.
     - Two letters together count as a palindrome so there are likely to be a good few.
 * Group Anagrams
     - Interesting solution by making a map with a list of Int 26 long as a key. (num of instances of a char)
@@ -128,10 +128,9 @@ LinkedLists
 * Reverse
     Iterative: 3 pointer, current.next while loop.
     Recursive: base case if head?.next null.
-    recursively return returnedNode, eaches 2nd last, perform switch as tasks decrement.
-
+    recursively return returnedNode, reaches 2nd last, perform switch as tasks decrement.
 * Detect cycle
-    - Use a set to keep track, iterate, add or return as case may ne.
+    - Use a set to keep track, iterate, add or return as case may be.
     - Floyd's fast/slow pointer, if they meet, there's a loop.
 * Merge 2 sorted
     Well practiced.
@@ -185,7 +184,7 @@ Intervals
     4. Check for Max (res, count).
     5. Return res.
 
-* Non-Overlapping Intervals; Min amount to remove to fix overlap
+* Non-Overlapping Intervals; min amount to remove to fix overlap
     1. Sort (by start).
     2. Keep rolling res.
     3. Start with prevEnd (we always keep an end value), iterate (start, end) from 1.
@@ -217,6 +216,7 @@ Matrix
 + Detect box of 1's / 0's
 + Word search
 + Set zero's
+Daily coding BFS of matrix.
 
 -----
 Trees
@@ -227,7 +227,7 @@ Trees
 
 * Same tree
     Recurse l and r.
-        Base cases: Both null: ret ture, only one null: ret false.
+        Base cases: Both null: ret true, only one null: ret false.
         Recursive check l.val == r.val, isSame(l.left, r.left) && isSame(l.right, r.right).
 
 * Invert / flip binary tree
@@ -253,7 +253,7 @@ Trees
              pop from start (Queue!)
              if left not null, add to queue, add value to level list
              if right not null, add to queue, add valid to level list.
-         If levelList is not empty (it might have been populated with leaf ndoes), add to list.
+         If levelList is not empty (it might have been populated with leaf nodes), add to list.
         return list.
 
 * Validate BST
@@ -264,7 +264,7 @@ Trees
         return isValid(node.left, min, node.val) && isValid(node.right, node.val, max)
 
 * Kth smallest element in BST
-    - In order traversal, create a list then return index k-1.
+    - In-order traversal, create a list then return index k-1.
     - Recursion is simple, InOrder BST traversal iteratively is the involved one.
 
 * Lowest Common Ancestor
@@ -279,7 +279,7 @@ Trees
 * Serialise / DeSerialise Binary Tree
     inOrder dfs, using an inner dfs() in each function of the codec.
     Add nodes to a list<String>, use "n" to represent null.
-    for deserialise, similar revers process, use incremnter i.
+    for deserialise, similar reverse process, use incremnter i.
     return dfs()
 
 * Construct Binary tree from pre-order and in-order.
@@ -362,7 +362,7 @@ Graphs
 + Pacific Atlantic Water Flow
 + Number of Islands
 + Graph Valid Tree
-+ Number of Connected Components in and Undirected Graph
++ Number of Connected Components in an Undirected Graph
 + Longest Consecutive Sequence
 + Alien Dictionary
 
@@ -445,15 +445,18 @@ They were so funny and nice, and that made me relaxed.
 
 §
 
-Patreon's mobile team is still pretty small and there are a lot of technical challenges and room to experiment. The team is really open to it. That's something you can't do at a big company. If that's your thing, you'd love to work here. Like I do now.
+Patreon's mobile team is still pretty small and there are a lot of technical challenges and room to experiment.
+The team is really open to it. That's something you can't do at a big company. If that's your thing, you'd love to work here. Like I do now.
 Interview Questions
 How would you architect a simple photo sharing app on iOS?
 
-I describe using all of my knowledge about mobile app architecture. MVC, MVVM, Viper and so on. Tell them what you know even though it's not directly related to the sample app in the question. Also think about how you would design the API model.
+I describe using all of my knowledge about mobile app architecture. MVC, MVVM, Viper and so on.
+Tell them what you know even though it's not directly related to the sample app in the question.
+Also think about how you would design the API model.
 
 
 
-Senior Frondtend
+Senior Frontend
 Interview
 
 1 coffee date, 1 phone screen, 1 onsite

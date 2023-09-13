@@ -7,8 +7,20 @@ fun main() {
     val arr = intArrayOf(1, 4, 3, 2, 7, 10)
     //println(reverseFrontBack(arr).toList())
     //println(reverseMiddleOut(arr).toList())
-    println("factorial: 5: ${factorial(5)}")
+    //println("factorial: 5: ${factorial(5)}")
+
+    // Kaprekar Constant
+    var num = 5748
+    val list = mutableListOf<Int>()
+    while (num > 0) {
+        list += num % 10
+        num /= 10
+    }
+    println("nums: $list")
 }
+
+
+
 
 fun factorial(i: Int): Int {
     if (i == 0) return 1

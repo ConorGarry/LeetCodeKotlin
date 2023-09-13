@@ -48,7 +48,7 @@ interface Graph<T> {
 
     // Open-ended way of adding EdgeType between vertices.
     fun add(
-        edge: EdgeType,
+        edge: EdgeType = UNDIRECTED,
         source: Vertex<T>,
         destination: Vertex<T>,
         weight: Double? = null
