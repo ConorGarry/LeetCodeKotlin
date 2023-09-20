@@ -52,3 +52,17 @@ fun isValid(s: String): Boolean {
     }
     return stack.isEmpty()
 }
+
+fun isValidOther(s: String) : Boolean {
+    val map = mapOf(')' to '(', '}' to '{', ']' to '[')
+    val stack = ArrayDeque<Char>()
+    s.forEach {
+        if (stack.lastOrNull() == map[it]) {
+            stack.removeLast()
+        } else {
+            return false
+        }
+        stack.add(it)
+    }
+}
+
